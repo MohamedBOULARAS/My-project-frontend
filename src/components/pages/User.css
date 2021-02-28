@@ -1,0 +1,48 @@
+.user-titre {
+    padding-top: 40px;
+    padding-left: 40px;
+    font-size: 40px;
+    padding-bottom: 0px;
+}
+
+.div-recherche-user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.user-Recherche {
+    height: 40px;
+    width: 350px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    border: 1px solid rgb(214, 212, 212);
+}
+
+.user-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 220px;
+}
+
+.user-btn-recherche {
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    border: 1px solid rgb(97, 87, 211);
+    background-color: transparent;
+    color: rgb(97, 87, 211);
+}
+
+.user-btn-imprimer {
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    border: 1px solid rgb(97, 87, 211);
+    background-color: transparent;
+    color: rgb(97, 87, 211);
+}

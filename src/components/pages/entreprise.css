@@ -1,0 +1,48 @@
+.entreprise-titre {
+    padding-top: 40px;
+    padding-left: 40px;
+    font-size: 40px;
+    padding-bottom: 0px;
+}
+
+.div-recherche {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.entreprise-Recherche {
+    height: 40px;
+    width: 350px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    border: 1px solid rgb(214, 212, 212);
+}
+
+.entreprise-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 220px;
+}
+
+.entreprise-btn-recherche {
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    border: 1px solid rgb(228, 211, 160);
+    background-color: transparent;
+    color: rgb(97, 87, 211);
+}
+
+.entreprise-btn-imprimer {
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    border: 1px solid rgb(97, 87, 211);
+    background-color: transparent;
+    color: rgb(97, 87, 211);
+}
