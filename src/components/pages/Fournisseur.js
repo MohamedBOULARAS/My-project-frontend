@@ -120,7 +120,7 @@ const Fournisseur = () => {
       console.log(res)
       var newArray = fournisseur
       var index = newArray.findIndex(x => x.id == id)
-      newArray[index] = res.client
+      newArray[index] = res.fournisseur
       setFournisseur([...newArray])
     })
     setOpen(false);

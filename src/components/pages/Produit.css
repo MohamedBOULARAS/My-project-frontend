@@ -1,11 +1,21 @@
+.produit-page {
+    display: flex;
+    flex-direction: row;
+}
+
+.produit-cntt {
+    
+    width: 83vw;
+    margin-left: 0.4em;
+}
 .produit-titre {
-    padding-top: 40px;
+    padding-top: 5px;
     padding-left: 40px;
     font-size: 40px;
     padding-bottom: 0px;
 }
 
-.div-recherche-produit {
+.produit-div-recherche {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,7 +29,7 @@
     border-radius: 5px;
     margin-bottom: 20px;
     padding-left: 10px;
-    border: 1px solid rgb(214, 212, 212);
+    border: 1px solid rgb(70, 140, 245);
 }
 
 .produit-btns {
@@ -33,16 +43,27 @@
     height: 40px;
     width: 100px;
     border-radius: 5px;
-    border: 1px solid rgb(97, 87, 211);
+    border: 1px solid rgb(70, 140, 245);
     background-color: transparent;
-    color: rgb(97, 87, 211);
+    color: rgb(70, 140, 245);
 }
 
 .produit-btn-imprimer {
     height: 40px;
     width: 100px;
     border-radius: 5px;
-    border: 1px solid rgb(97, 87, 211);
+    border: 1px solid rgb(70, 140, 245);
     background-color: transparent;
-    color: rgb(97, 87, 211);
+    color: rgb(70, 140, 245);
+}
+
+.fa-trash-alt {
+    font-size: 25px;
+    color: red;
+}
+
+
+.fa-pen {
+    font-size: 25px;
+    color: rgb(70, 140, 245);
 }

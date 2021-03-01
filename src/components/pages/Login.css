@@ -1,8 +1,8 @@
 .form-login {
     float: right;
     background-color:rgb(251, 251, 251);
-    height: 600px;
-    width: 500px;
+    height: 75vh;
+    width: 30vw;
     border: none;
     border-radius: 8px;
     margin-right: 200px;
@@ -50,7 +50,7 @@
     border: none;
     border-bottom: 1px solid rgb(220, 216, 216);
     height: 40px;
-    width: 430px;
+    width: 26vw;
     margin-bottom: 40px;
   }
 
@@ -59,7 +59,7 @@
     border: none;
     border-bottom: 1px solid rgb(220, 216, 216);
     height: 40px;
-    width: 430px;
+    width: 26vw;
   }
 
   .tell-form{
