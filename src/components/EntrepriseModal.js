@@ -98,6 +98,7 @@ export default function EntrepriseModal({setEntreprise,entreprise}) {
 
   const handleOpen = () => {
     setOpen(true);
+
   };
 
   const handleClose = () => {

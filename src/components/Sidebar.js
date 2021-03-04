@@ -43,13 +43,13 @@ export default function SidBar()  {
         <div style={{ width: '20vw', maxWidth: '20vw', minHeight: '100vh' }}>
           <Menu
             defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1'], ['sub2']}
+           //defaultOpenKeys={['sub1'], ['sub2']}
             mode="inline"
             theme="white"
             inlineCollapsed={collapsed}
             style={{ maxWidth: '20vw', height: '100vh', position: 'fixed', boxShadow: '0 6px 20px rgba(56, 125, 255, 0.17)', fontSize: '18px' }}
           >
-            <Menu.Item key="1" icon={<BarChartOutlined />}>
+            <Menu.Item onClick={() => handleNavigate('/tableau')} key="1" icon={<BarChartOutlined />}>
               Tableau de bord
           </Menu.Item>
             <SubMenu key="sub1" icon={<SettingOutlined />} title="Paramètre">
@@ -70,7 +70,7 @@ export default function SidBar()  {
             Produits et Services
           </Menu.Item>
             <SubMenu key="sub2" icon={<FormOutlined />} title="Facturation">
-              <Menu.Item onClick={() => handleNavigate('/facture')} key="7" icon={<FormOutlined />}>
+              <Menu.Item onClick={() => handleNavigate('/factureclient')} key="7" icon={<FormOutlined />}>
               Facture Client
               </Menu.Item>
               <Menu.Item onClick={() => handleNavigate('/facture')} key="8" icon={<FormOutlined />} style={{ fontSize: '16px'}}>

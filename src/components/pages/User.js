@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useStylesuseS } from 'react';
-import FournisseurModal from '../FournisseurModal.js';
+import UserModal from '../UserModal.js';
 import './User.css';
 import axios from 'axios';
 import SidBar from '../Sidebar.js';
@@ -73,7 +73,7 @@ const User = () => {
   //fetch get All Data
   const getUserData = async () => {
     try {
-      const data = await axios.get("http://localhost:5000/register/signup") 
+      const data = await axios.get("http://localhost:5000/register") 
       console.log(data.data)
       setUser(data.data)
     }
@@ -161,7 +161,7 @@ const handleClose = () => {
           </div>
 
           <div>
-            <FournisseurModal user={user} setUser={setUser} />
+            <UserModal user={user} setUser={setUser} />
           </div>
           <div>
             <TableContainer style={{ backgroundColor: 'rgb(255, 255, 255)' }} component={Paper}>

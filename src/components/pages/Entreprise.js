@@ -15,7 +15,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import NavFCT from '../NavBarFct.js'
 import { Button } from '@material-ui/core';
 import TablePagination from '@material-ui/core/TablePagination';
-import cookie from 'react-cookies'
+import cookie from 'react-cookies';
+import * as XLSX from "xlsx";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -44,6 +45,9 @@ const useStyles = makeStyles({
 
 
 const Entreprise = () => {
+
+
+
   const [myCookie, setMyCookie] = useState(cookie.loadAll())
   const classes = useStyles();
   // get client
@@ -108,7 +112,7 @@ const Entreprise = () => {
       .catch(err => console.log(err))
 
   }
-
+/*
   const updateData = async (id) => {
     axios.put('http://localhost:5000/entreprise', {
       headers: {
@@ -125,7 +129,7 @@ const Entreprise = () => {
     })
     setOpen(false);
   }
-
+*/
 
 const handleOpen = () => {
   setOpen(true);
@@ -134,6 +138,41 @@ const handleOpen = () => {
 const handleClose = () => {
   setOpen(false);
 };
+
+// read excel file
+
+const readExcel = (file) => {
+  const promise = new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsArrayBuffer(file);
+
+    fileReader.onload = (e) => {
+
+      const bufferArray = e.target.result;
+
+      const wb = XLSX.read(bufferArray, { type: "buffer" });
+
+      const wsname = wb.SheetNames[0];
+
+      const ws = wb.Sheets[wsname];
+
+      const data = XLSX.utils.sheet_to_json(ws);
+
+      resolve(data);
+    };
+
+    fileReader.onerror = (error) => {
+      reject(error);
+    };
+  });
+
+  promise.then((item) => {
+    setEntreprise(item);
+  });
+
+};
+
+
 
 
   return (
@@ -158,6 +197,15 @@ const handleClose = () => {
               <button className='entreprise-btn-recherche'>Recherche</button>
               <button className='entreprise-btn-imprimer'>Imprimer</button>
             </div>
+          </div>
+          <div className='excel-input'>
+          <input
+            type="file"
+            onChange={(e) => {
+            const file = e.target.files[0];
+            readExcel(file);
+           }}
+          />
           </div>
 
           <div>
@@ -188,7 +236,7 @@ const handleClose = () => {
                       return item
                     } else if (
                         item.raison_social.toLowerCase().includes(recherche.toLowerCase())
-                        ) {
+                         ) {
                       return item
                     }
                   })
@@ -220,7 +268,7 @@ const handleClose = () => {
                             {item.adresse}
                           </StyledTableCell>
                           <StyledTableCell style={{ backgroundColor: 'rgb(255, 255, 255)', border: '1px medium grey'}} component="th" scope="row">
-                            <Button  onClick={handleOpen}><i class="fas fa-pen"></i></Button>
+                            <Button  ><i class="fas fa-pen"></i></Button>
                             <Button  onClick={() => deleteSelected(item._id)}><i  class="fas fa-trash-alt"></i></Button>
                           </StyledTableCell>
                           

@@ -1,21 +1,21 @@
-.fournisseur-page {
+.fctclient-page {
     display: flex;
     flex-direction: row;
 }
 
-.fournisseur-cntt {
+.fctclient-cntt {
     
     width: 83vw;
     margin-left: 0.4em;
 }
-.fournisseur-titre {
+.fctclient-titre {
     padding-top: 5px;
     padding-left: 40px;
     font-size: 30px;
     padding-bottom: 0px;
 }
 
-.fournisseur-div-recherche {
+.div-recherche-fctclient {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +23,7 @@
     margin-bottom: 20px;
 }
 
-.fournisseur-Recherche {
+.fctclient-Recherche {
     height: 40px;
     width: 350px;
     border-radius: 5px;
@@ -32,14 +32,14 @@
     border: 1px solid rgb(70, 140, 245);
 }
 
-.fournisseur-btns {
+.fctclient-btns {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     width: 220px;
 }
 
-.fournisseur-btn-recherche {
+.fctclient-btn-recherche {
     height: 40px;
     width: 100px;
     border-radius: 5px;
@@ -48,7 +48,7 @@
     color: rgb(70, 140, 245);
 }
 
-.fournisseur-btn-imprimer {
+.fctclient-btn-imprimer {
     height: 40px;
     width: 100px;
     border-radius: 5px;

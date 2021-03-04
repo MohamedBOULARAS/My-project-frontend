@@ -11,7 +11,7 @@
 .entreprise-titre {
     padding-top: 5px;
     padding-left: 40px;
-    font-size: 40px;
+    font-size: 30px;
     padding-bottom: 0px;
 }
 
@@ -66,4 +66,9 @@
 .fa-pen {
     font-size: 25px;
     color: rgb(70, 140, 245);
+}
+
+
+.excel-input {
+    margin-bottom: 15px;
 }

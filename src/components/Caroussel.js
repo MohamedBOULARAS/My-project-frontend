@@ -23,7 +23,7 @@ import { Button } from './Button';
               buttonStyle='btn--outline'
               buttonSize='btn--large'
               >
-                  GET STARTED
+                  Mon Compte
               </Button>
               <Button
               className="btn-2"

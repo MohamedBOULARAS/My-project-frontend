@@ -63,11 +63,11 @@ const NavBar = () => {
                     </li>
                     <li className='nav-item'>
                         <Link to="/sign-up" className="nav-links-mobile" onClick={closeMobileMenu}>
-                        GET STARTED
+                        Mon Compte
                         </Link>
                     </li>
                 </ul>
-                {button && <Button className='btn-1' buttonStyle='btn--outline'>GET STARTED</Button>}
+                {button && <Button className='btn-1' buttonStyle='btn--outline'>Mon Compte</Button>}
             </div>
         </nav>
         </>
