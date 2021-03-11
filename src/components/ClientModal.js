@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import './ClientModal.css'
+import cookie from 'react-cookies'
+
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -44,6 +46,10 @@ export default function ClientModal({setClient,client}) {
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+
+  //cookie
+  const [myCookie, setMyCookie] = useState(cookie.loadAll())
+
 
   //hook modal
   const [codeClient, setCodeClient] = useState("");
@@ -106,7 +112,10 @@ export default function ClientModal({setClient,client}) {
       var newClient = {code_client: codeClient, raison_social: raisonSocial, nom: nomClient, prenom: prenomClient, email: emailClient, tell: tellClient, adresse: adresseClient, activite: activiteClient, nif: nifClient, nis: nisClient, rib: ribClient, rc: rcClient, note: noteClient}
       const requestOptions = {
         method: 'post',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': myCookie.token
+          },
         body: JSON.stringify(newClient)
       }
       //fetch Post Data
@@ -130,10 +139,10 @@ export default function ClientModal({setClient,client}) {
 
   const body = (
     <div className="client-modal">
-    <div style={{modalStyle, height: '700px', width: '800px', marginTop: '6vh', marginLeft: '23vw', borderRadius: '10px', border: 'none', boxShadow: 'black'}} className={classes.paper}>
-      <div className="cntt-client-modal">
-        <div className="cntt-client-1">
-      <h2 style={{paddingTop: '30px', paddingLeft: '30px'}} id="simple-modal-title">Client</h2>     
+    <div  style={{modalStyle, height: '700px', width: '1200px', marginTop: '6vh', marginLeft: '13vw', borderRadius: '10px', border: 'none', boxShadow: 'black'}} className={classes.paper}>
+
+      <h2 style={{paddingTop: '30px', paddingLeft: '30px'}} id="simple-modal-title">Client</h2>  
+      <div className="contact">
       <input type="text"
                         className="code-client"
                         id="code_client"
@@ -170,7 +179,7 @@ export default function ClientModal({setClient,client}) {
                         onChange={emailClientHandler}
                         value={emailClient}
       /> 
-             <input type="text"
+      <input type="text"
                         className="tel-client"
                         id="emailclient"
                         placeholder="Numéro de téléphone"
@@ -185,8 +194,6 @@ export default function ClientModal({setClient,client}) {
                         value={adresseClient}
 
       /> 
-      </div>
-      <div className="cntt-client-2">
       <input type="text"
                         className="activité-client"
                         id="activitéclientr"
@@ -195,6 +202,8 @@ export default function ClientModal({setClient,client}) {
                         value={activiteClient}
 
       />
+      </div>  
+      <div className="info-fiscaux">
       <input type="text"
                         className="nif"
                         id="nif"
@@ -224,21 +233,46 @@ export default function ClientModal({setClient,client}) {
                         onChange={rcClientHandler}
                         value={rcClient}
       />
-         <input type="text"
+      </div>
+      <div className="reseaux-socieaux">
+      <input type="text"
+                        className="client-fb"
+                        id="note"
+                        placeholder="FaceBook"
+                        onChange={noteClientHandler}
+                        value={noteClient}
+
+      /> 
+               <input type="text"
+                        className="client-insta"
+                        id="note"
+                        placeholder="Instagram"
+                        onChange={noteClientHandler}
+                        value={noteClient}
+
+      /> 
+               <input type="text"
+                        className="client-linkedin"
+                        id="note"
+                        placeholder="Linkedin"
+                        onChange={noteClientHandler}
+                        value={noteClient}
+
+      /> 
+      </div>
+               <input type="text"
                         className="client-note"
                         id="note"
                         placeholder="Note"
                         onChange={noteClientHandler}
                         value={noteClient}
 
-      />   
-      </div> 
+      />
       </div>
       <div className="btn-client-modal">
       <button className='client-enregistrer' onClick={addClient} onSubmit={addClient}>Enregistrer</button>
       <button className='client-annuler' onClick={handleClose}>Annuler</button>
       </div>
-    </div>
     </div>
   );
 

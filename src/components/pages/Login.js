@@ -31,19 +31,21 @@ function RegistrationForm(props) {
     const sendDetailsToServer = () => {
         if (login.email.length && login.password.length) {
             
-            const payload = {
+            var payload = {
                 "email": login.email,
                 "password": login.password,
             }
             fetch('http://localhost:5000/register/login', {
-                body: JSON.stringify(payload), method: 'POST',
+                method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify(payload),
             })
                 .then((response) => response.json())
                 .then((response) => {
+                    console.log(response);
                     if(response.error){
                         console.log(response.error)
                         setLoading(false);
@@ -58,7 +60,7 @@ function RegistrationForm(props) {
                     console.log(error);
                 })
         } else {
-            alert('provide email + password');
+            alert('email ou mot de passe manquant');
         }
     }
 

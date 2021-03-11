@@ -168,6 +168,36 @@ const readExcel = (file) => {
 
   promise.then((item) => {
     setEntreprise(item);
+
+
+
+
+    //Fetch data to DB
+    var newUsers = {
+      
+        code_entreprise: item.code_entreprise,
+        raison_social: item.raison_social,
+        email: item.email,
+        tell: item.tell,
+        address: item.address,
+      
+    }
+    console.log(item)
+    fetch("http://localhost:5000/entreprise", {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify(newUsers),
+    }) 
+    .then((res) => res.json())
+    .then((res) => {
+
+      console.log(res)
+      setEntreprise([...entreprise,res.entreprise], (""))
+    })
+    .catch((err) => console.log('error'))
+
   });
 
 };

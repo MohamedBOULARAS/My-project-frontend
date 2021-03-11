@@ -20,7 +20,7 @@ fctclient-info-1 {
     margin-left: 20PX;
 }
 .btn-user-modal {
-    margin-top:33vh;
+    margin-top:32vh;
     margin-left: 34vw;
 
 }
@@ -58,7 +58,7 @@ fctclient-info-1 {
 }
 
 .notefctclient {
-    width: 450px;
+    width: 425px;
     height: 70px;
     border-radius: 5px;
     border: 2px solid rgb(192, 190, 190);
@@ -72,6 +72,12 @@ fctclient-info-1 {
 
 .tva-ttc {
     margin-left: 10px;
+}
+
+.fct-prod-modal{
+
+    display: flex;
+    flex-direction: row;
 }
 
 

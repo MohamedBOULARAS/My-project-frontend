@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import './UserModal.css'
@@ -7,6 +7,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import './UserModal.css';
+
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -56,6 +58,10 @@ export default function UserModal({setUser,user}) {
   const [lastName, setLastName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [entreprise, setEntreprise] = useState([]);
+  const [selectedEntreprise, setSelectedEntreprise] = useState([]);
+
+
 
     //get data from modal and passed to fournisseur list
     const codeUserHandler = (e) => {
@@ -76,11 +82,18 @@ export default function UserModal({setUser,user}) {
     const userPasswordHandler = (e) => {
       setUserPassword(e.target.value)
     };
+    const entrepriseHandler = (value) => {
+      console.log(entreprise[value])
+      setSelectedEntreprise(value)
+    };
+
+
 
 
     const addUser = (e) => {
       e.preventDefault()
-      var newUser = {code_user: codeUser, username: userName, firstname: firstName, lastname: lastName, email: userEmail, password: userPassword}
+      var newUser = {code_user: codeUser, username: userName, firstname: firstName, lastname: lastName, email: userEmail, password: userPassword, entr:[{ raison_social : entreprise[selectedEntreprise].raison_social }]}
+      console.log({selectedEntreprise})
       const requestOptions = {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
@@ -94,7 +107,14 @@ export default function UserModal({setUser,user}) {
         setUser([...user,res.user], (""))
       })
       setOpen(false);
+
     }
+
+    useEffect(async () => {
+      var res = await fetch('http://localhost:5000/entreprise');
+      var data = await res.json();
+      setEntreprise(data);
+    }, []);
 
 
   const handleOpen = () => {
@@ -110,12 +130,14 @@ export default function UserModal({setUser,user}) {
     setAge(event.target.value);
   };
 
+
   const body = (
     <div className="user-modal">
-    <div style={{modalStyle, height: '700px', width: '800px', marginTop: '6vh', marginLeft: '23vw', borderRadius: '10px', border: 'none', boxShadow: 'black'}} className={classes.paper}>
+    <div style={{modalStyle, height: '550px', width: '650px', marginTop: '6vh', marginLeft: '23vw', borderRadius: '10px', border: 'none', boxShadow: 'black'}} className={classes.paper}>
       <div className="cntt-user-modal">
-        <div className="cntt-user-1">
-      <h2 style={{paddingTop: '30px', paddingLeft: '30px'}} id="simple-modal-title">Utilisateur</h2>     
+      <h2 style={{paddingTop: '30px', paddingLeft: '30px'}} id="simple-modal-title">Utilisateur</h2>
+      <div className="all-ligne">
+      <div className="ligne-1">
       <input type="text"
                         className="code-user"
                         id="code_user"
@@ -130,6 +152,8 @@ export default function UserModal({setUser,user}) {
                         onChange={userNameHandler}
                         value={userName}
       /> 
+      </div>
+      <div className="ligne-2">
       <input type="text"
                         className="user-first-name"
                         id="user-first-name"
@@ -144,7 +168,9 @@ export default function UserModal({setUser,user}) {
                         onChange={lastNameHandler}
                         value={lastName}
       /> 
-             <input type="text"
+      </div>
+      <div className="ligne-3">
+      <input type="text"
                         className="user-email"
                         id="tuserEmail"
                         placeholder="e-mail"
@@ -157,50 +183,50 @@ export default function UserModal({setUser,user}) {
                         placeholder="Mot de passe "
                         onChange={userPasswordHandler}
                         value={userPassword}
-
       /> 
       </div>
-      <div>
-      <FormControl style={{height: '50px', width: '250px', marginLeft: '60px'}}  variant="outlined" className={classes.formControl}>
-<InputLabel htmlFor="outlined-age-native-simple">Entreprise</InputLabel>
-<Select
-  native
-  value={age}
-  onChange={handleChange}
-  label="Entreprise"
-  inputProps={{
-    name: 'entreprise',
-    id: 'outlined-age-native-simple',
-  }}
->
-  <option aria-label="None" value="" />
-  <option value={10}>Les Entreprises</option>
-</Select>
-</FormControl> 
+      <div className="ligne-4">
+      <FormControl style={{height: '50px', width: '250px', marginLeft: '30px'}}  variant="outlined" className={classes.formControl}>
+      <InputLabel htmlFor="outlined-age-native-simple">Entreprise</InputLabel>
+        <Select
+           native
+           value={selectedEntreprise}
+           onChange={e => entrepriseHandler(e.target.value)}
+           label="Entreprise"
+           inputProps={{
+             name: 'entreprise',
+             id: 'outlined-age-native-simple',
+            }}
+        >
+        <option aria-label="None" value="" />
+          {entreprise.map((entr, index) => (
+        <option key={index} value={index}>{entr.raison_social}</option>
+          ))}
+       </Select>
+       </FormControl> 
 
-
-<FormControl style={{height: '50px', width: '250px', borderColor: 'rgb(70, 140, 245)'}} variant="outlined" className={classes.formControl}>
-<InputLabel htmlFor="outlined-age-native-simple">Role</InputLabel>
-<Select
-  native
-  value={age}
-  onChange={handleChange}
-  label="Role"
-  inputProps={{
-    name: 'role',
-    id: 'outlined-age-native-simple',
-  }}
->
-  <option aria-label="None" value="" />
-  <option value={10}>Super admin</option>
-  <option value={20}>Admin</option>
-  <option value={30}>User</option>
-</Select>
-</FormControl> 
+       <FormControl style={{height: '50px', width: '250px', borderColor: 'rgb(70, 140, 245)', marginLeft: '10px'}} variant="outlined" className={classes.formControl}>
+       <InputLabel htmlFor="outlined-age-native-simple">Role</InputLabel>
+         <Select
+           native
+           value={age}
+           onChange={handleChange}
+           label="Role"
+           inputProps={{
+           name: 'role',
+           id: 'outlined-age-native-simple',
+           }}
+          >
+          <option aria-label="None" value="" />
+          <option value={10}>Super admin</option>
+          <option value={20}>Admin</option>
+          <option value={30}>User</option>
+         </Select>
+       </FormControl> 
       </div>
-
       </div>
-      <div className="btn-user-modal">
+      </div>
+      <div className="bt-user-modal">
       <button className='user-enregistrer' onClick={addUser} onSubmit={addUser}>Enregistrer</button>
       <button className='user-annuler' onClick={handleClose}>Annuler</button>
       </div>

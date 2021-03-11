@@ -46,7 +46,7 @@ const useStyles = makeStyles({
 const Produit = () => {
   const [myCookie, setMyCookie] = useState(cookie.loadAll())
   const classes = useStyles();
-  // get client
+  // get prodact
   const [produit, setProduit] = useState([])
   const [open, setOpen] = React.useState(false);
 

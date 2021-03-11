@@ -1,13 +1,44 @@
 import React, { useState } from 'react';
 import './NavBarFct.css';
+import { useHistory } from "react-router-dom";
 import { Link, Router } from 'react-router-dom';
+import cookie from 'react-cookies'
+
 
 
 
 
 
 const NavFCT = () => {
+
+    let history = useHistory();
+    const handelSubmitClick = (e) => {
+        e.preventDefault();
+        sendDetailToServer();
+    }
+
+    const logout = (e) => {
+        handelSubmitClick(e)
+        history.push('/sign-up')
+    }
+
+    const sendDetailToServer = () => {
+        console.log(sendDetailToServer)
+        cookie.remove('token', {
+            path: '/'
+        })
+        cookie.remove('user', {
+            path: '/'
+        })
+
+    }
+    
+
+
+
+
     const [navbar, setNavbar] = useState(false);
+    
 
     const changeBackground = () => {
         if (window.scrollY >= 80) {
@@ -37,9 +68,9 @@ const NavFCT = () => {
                         </Link>
                     </li>
                     <li className='navfct-item'>
-                        <Link to="/" className="navfct-links">
+                        <button style={{marginTop: '33px', marginLeft: '5px', border: 'none', backgroundColor: 'transparent'}} onClick={logout}>
                         <i style={{fontSize: '27px', color: 'grey'}} class="fas fa-power-off"></i>
-                        </Link>
+                        </button>
                     </li>
                 </ul>
             </div>

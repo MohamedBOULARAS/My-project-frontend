@@ -9,6 +9,9 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import 'date-fns';
+import axios from 'axios';
+
+
 
 //table import
 import { withStyles } from '@material-ui/core/styles';
@@ -19,8 +22,12 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import TablePagination from '@material-ui/core/TablePagination';
 
-import ProduitModal from './ProduitModal.js';
+
+import ProdFctModal from './ProdFctModal.js';
+import DesFctModal from './DesFctModal.js';
+
 
 
 //table parametre
@@ -105,6 +112,7 @@ export default function FctClientModal({setFctClient, fctClient}) {
 
 
   //hook modal
+  const [facture, setFacture] = useState("");
   const [numFacture, setNumFacture] = useState("");
   const [typeFacture, setTypeFacture] = useState("");
   const [dateFacture, setDateFacture] = useState(new Date());
@@ -113,7 +121,6 @@ export default function FctClientModal({setFctClient, fctClient}) {
   const [dateEcheance, setDateEcheance] = useState(new Date());
   const [numeroBc, setNumeroBc] = useState("");
   const [noteFacture, setNoteFacture] = useState("");
-  const [remarqueFacture, setRemarqueFacture] = useState("");
   const [prixHt, setPrixHt] = useState("");
   const [prixRemise, setPrixRemise] = useState("");
   const [prixFrais, setPrixFrais] = useState("");
@@ -121,9 +128,17 @@ export default function FctClientModal({setFctClient, fctClient}) {
   const [prixTimbre, setPrixTimbre] = useState("");
   const [prixTtc, setPrixTtc] = useState("");
   const [produit, setProduit] = useState([]);
+  const [client, setClient] = useState([]);
+  const [selectedClient, setSelectedClient] = useState(null);
+
+
+
 
 
       //get data from modal and passed to facture list list
+      const factureHandler = (e) => {
+        setFacture(e.target.value)
+      };
     const numFactureHandler = (e) => {
       setNumFacture(e.target.value)
     };
@@ -131,7 +146,12 @@ export default function FctClientModal({setFctClient, fctClient}) {
       setTypeFacture(e.target.value)
     };
     const dateFactureHandler = (e) => {
+      console.log(e.target.value)
       setDateFacture(e.target.value)
+    };
+    const clientHandler = (value) => {
+      console.log(client[value])
+      setSelectedClient(value)
     };
     const quantiteHandler = (e) => {
         setQuantite(e.target.value)
@@ -147,9 +167,6 @@ export default function FctClientModal({setFctClient, fctClient}) {
     };
     const noteFactureHandler = (e) => {
         setNoteFacture(e.target.value)
-      };
-      const remarqueFactureHandler = (e) => {
-        setRemarqueFacture(e.target.value)
       };
       const prixHtHandler = (e) => {
         setPrixHt(e.target.value)
@@ -170,9 +187,40 @@ export default function FctClientModal({setFctClient, fctClient}) {
         setPrixTtc(e.target.value)
       };
 
+// pagination
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const HandleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const HandleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, fctClient.length - page * rowsPerPage);
+
+
      const addFctClient = (e) => {
       e.preventDefault()
-      var newFctClient = {numero_de_facture: numFacture, type_facture: typeFacture, date_de_facture: dateFacture, quantite: quantite, date_envoi: dateEnvoi, date_echeance: dateEcheance, numero_bc: numeroBc, note: noteFacture, remarque: remarqueFacture, prix_ht: prixHt, prix_remise: prixRemise, prix_frais: prixFrais, prix_tva: prixTva, prix_timbre: prixTimbre, prix_ttc: prixTtc}
+      var newFctClient = {
+          numero_de_facture: numFacture,
+          type_facture: typeFacture,
+          date_de_facture: dateFacture,
+          quantite: quantite,
+          date_envoi: dateEnvoi,
+          date_echeance: dateEcheance,
+          numero_bc: numeroBc,
+          note: noteFacture,
+          prix_ht: prixHt,
+          prix_remise: prixRemise,
+          prix_frais: prixFrais,
+          prix_tva: prixTva,
+          prix_timbre: prixTimbre,
+          prix_ttc: prixTtc
+      }
       const requestOptions = {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
@@ -188,6 +236,12 @@ export default function FctClientModal({setFctClient, fctClient}) {
       setOpen(false);
     }
 
+    useEffect(async () =>{
+      var res = await fetch('http://localhost:5000/client');
+      var data = await res.json();
+      setClient(data);
+    }, []);
+
 
   const handleOpen = () => {
     setOpen(true);
@@ -202,9 +256,26 @@ export default function FctClientModal({setFctClient, fctClient}) {
     setSelectedDate(date);
   };
 
+
+    //fetch get All Data
+    const getProdactData = async () => {
+      try {
+        const data = await axios.get("http://localhost:5000/facture") 
+        console.log(data.data)
+        setFacture(data.data)
+      }
+      catch (e) {
+        console.log(e)
+      }
+    }
+  
+    useEffect(() => {
+      getProdactData()
+    }, [])
+
   const body = (
-    <div style={{modalStyle, height: '750px', width: '1400px', marginTop: '2vh', marginLeft: '6vw', borderRadius: '10px', border: 'none', boxShadow: 'black'}} className={classes.paper}>
-      <h2 style={{paddingTop: '5px', paddingLeft: '30px', paddingBottom: '-90px'}} id="simple-modal-title">Facture</h2> 
+    <div style={{modalStyle, height: '95vh', width: '1400px', marginTop: '2vh', marginLeft: '6vw', borderRadius: '10px', border: 'none', boxShadow: 'black'}} className={classes.paper}>
+      <h2 style={{paddingTop: '5px', paddingLeft: '30px', marginBottom: '-30px'}} id="simple-modal-title">Facture</h2> 
       <div className="typefct-ttcfct">
       <div className="fctclient-info-1">
           <div className="typefct-datefct">
@@ -222,6 +293,7 @@ export default function FctClientModal({setFctClient, fctClient}) {
           >
             <option aria-label="None" value="" />
             <option value={10}>{typeFacture}</option>
+
           </Select>
         </FormControl>  
         <form className={classes.container} noValidate>
@@ -229,7 +301,8 @@ export default function FctClientModal({setFctClient, fctClient}) {
         id="date"
         label="Date de la facture"
         type="date"
-        defaultValue="2017-05-24"
+        Value={dateFacture}
+        onChange={dateFactureHandler}
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
@@ -249,15 +322,16 @@ export default function FctClientModal({setFctClient, fctClient}) {
         <InputLabel htmlFor="outlined-age-native-simple">Client</InputLabel>
           <Select
             native
-            value={age}
+            onChange={e => clientHandler(e.target.value)}
             label="Client"
             inputProps={{
               name: 'client',
               id: 'outlined-age-native-simple',
             }}
           >
-            <option aria-label="None" value="" />
-            <option value={10}>Les Clients</option>
+            {client.map((clt, index) => (
+            <option key={index} value={index}>{clt.raison_social}</option>
+            ))}
           </Select>
         </FormControl> 
         </div>
@@ -269,7 +343,8 @@ export default function FctClientModal({setFctClient, fctClient}) {
         id="date"
         label="Date d'envoi"
         type="date"
-        defaultValue="2017-05-24"
+        Value={dateEnvoi}
+        onChange={dateEnvoiHandler}
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
@@ -282,7 +357,8 @@ export default function FctClientModal({setFctClient, fctClient}) {
         id="date"
         label="Date d'écheance"
         type="date"
-        defaultValue="2017-05-24"
+        Value={dateEcheance}
+        onChange={dateEcheanceHandler}
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
@@ -311,14 +387,14 @@ export default function FctClientModal({setFctClient, fctClient}) {
         <div className="fctclient-info-3">
         <div className="ht-ttc">
         <div className="ht-totalht">
-        <input type="text"
+                <input type="text"
                         className="prixht"
                         id="prixht"
                         placeholder="Prix HT"
                         onChange={prixHtHandler}
                         value={prixHt}
                         style={{height: '40px', width: '200px', border: '2px solid rgb(192, 190, 190)', borderRadius: '5px', marginTop: '5px', paddingLeft: '10px'}}
-        /> 
+                /> 
                 <input type="text"
                         className="remise"
                         id="remise"
@@ -327,7 +403,7 @@ export default function FctClientModal({setFctClient, fctClient}) {
                         value={prixRemise}
                         style={{height: '40px', width: '200px', border: '2px solid rgb(192, 190, 190)', borderRadius: '5px', marginTop: '5px', paddingLeft: '10px'}}
 
-        /> 
+                /> 
                 <input type="text"
                         className="frais"
                         id="frais"
@@ -336,7 +412,7 @@ export default function FctClientModal({setFctClient, fctClient}) {
                         value={prixFrais}
                         style={{height: '40px', width: '200px', border: '2px solid rgb(192, 190, 190)', borderRadius: '5px', marginTop: '5px', paddingLeft: '10px'}}
 
-        /> 
+                /> 
                 <input type="text"
                         className="Totalht"
                         id="totalht"
@@ -345,7 +421,7 @@ export default function FctClientModal({setFctClient, fctClient}) {
                         value={noteFacture}
                         style={{height: '40px', width: '200px', border: '2px solid rgb(192, 190, 190)', borderRadius: '5px', marginTop: '5px', paddingLeft: '10px'}}
 
-        /> 
+                /> 
         </div>
         <div className="tva-ttc">
                 <input type="text"
@@ -356,7 +432,7 @@ export default function FctClientModal({setFctClient, fctClient}) {
                         value={prixTva}
                         style={{height: '40px', width: '200px', border: '2px solid rgb(192, 190, 190)', borderRadius: '5px', marginTop: '5px', paddingLeft: '10px'}}
 
-        /> 
+                /> 
                 <input type="text"
                         className="timbre"
                         id="timbre"
@@ -365,7 +441,7 @@ export default function FctClientModal({setFctClient, fctClient}) {
                         value={prixTimbre}
                         style={{height: '40px', width: '200px', border: '2px solid rgb(192, 190, 190)', borderRadius: '5px', marginTop: '5px', paddingLeft: '10px'}}
 
-        /> 
+                /> 
                 <input type="text"
                         className="ttc"
                         id="ttc"
@@ -374,20 +450,24 @@ export default function FctClientModal({setFctClient, fctClient}) {
                         value={prixTtc}
                         style={{height: '40px', width: '200px', border: '2px solid rgb(192, 190, 190)', borderRadius: '5px', marginTop: '5px', paddingLeft: '10px'}}
 
-        /> 
+                /> 
         </div>
         </div>
         </div>
         </div>
-        <div className="prodact-modal">
-        <ProduitModal produit={produit} setProduit={setProduit} />
+        <div className="fct-prod-modal">
+        <div className="fct-prod-modal-1">
+        <ProdFctModal produit={facture} setProduit={setFacture} />
+        </div>
+        <div className="fct-prod-modal-2">
+        <DesFctModal produit={facture} setProduit={setFacture} />
+        </div>
         </div>
         <div className="prodact-table">
         <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell style={{ fontSize: '17px', backgroundColor: 'rgb(255, 255, 255)', color: 'black' }} align="left">Code</StyledTableCell>
             <StyledTableCell style={{ fontSize: '17px', backgroundColor: 'rgb(255, 255, 255)', color: 'black' }} align="left">Designation</StyledTableCell>
             <StyledTableCell style={{ fontSize: '17px', backgroundColor: 'rgb(255, 255, 255)', color: 'black' }} align="left">PU</StyledTableCell>
             <StyledTableCell style={{ fontSize: '17px', backgroundColor: 'rgb(255, 255, 255)', color: 'black' }} align="left">Quantité</StyledTableCell>
@@ -395,25 +475,38 @@ export default function FctClientModal({setFctClient, fctClient}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {produit.map((item) => (
+          {produit
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) //pagination
+          .map((item) => (
+              
             <StyledTableRow>
                           <StyledTableCell style={{ backgroundColor: 'rgb(255, 255, 255)', border: '1px medium grey' }} component="th" scope="row">
-                            {item.nom_du_produit}
+                          {item.nom_du_produit} {item.discription}
                           </StyledTableCell>
                           <StyledTableCell style={{ backgroundColor: 'rgb(255, 255, 255)', border: '1px medium grey' }} component="th" scope="row">
-                            {item.discription}
+                            {item.prix_achat} 
                           </StyledTableCell>
                           <StyledTableCell style={{ backgroundColor: 'rgb(255, 255, 255)', border: '1px medium grey' }} component="th" scope="row">
-                            {item.prix_achat} DZD
+                            {item.quantité}
                           </StyledTableCell>
                           <StyledTableCell style={{ backgroundColor: 'rgb(255, 255, 255)', border: '1px medium grey' }} component="th" scope="row">
-                            {item.prix_vente}
+                            {item.prix_ht}
                           </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
+      <TablePagination
+                rowsPerPageOptions={[3]}
+                component="div"
+                count={fctClient.length}
+                page={page}
+                onChangePage={HandleChangePage}
+                rowsPerPage={rowsPerPage}
+                onChangeRowsPerPage={HandleChangeRowsPerPage}
+              />
     </TableContainer>
+    
         </div>
 
       <div className="btn-user-modal">

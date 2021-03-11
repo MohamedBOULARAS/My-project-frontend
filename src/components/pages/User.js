@@ -96,7 +96,7 @@ const User = () => {
   }
   const deleteSelected = async (id) => { //delete client
     console.log(myCookie)
-    axios.delete(`http://localhost:5000/register/signup/${id}`, {
+    axios.delete(`http://localhost:5000/register/${id}`, {
       headers: {
         'Authorization': myCookie.token
       }
@@ -110,7 +110,7 @@ const User = () => {
   }
 
   const updateData = async (id) => {
-    axios.put('http://localhost:5000/register/signup', {
+    axios.put(`http://localhost:5000/register/${id}`, {
       headers: {
         'Authorization': myCookie.token
       }
@@ -123,7 +123,7 @@ const User = () => {
       newArray[index] = res.user
       setUser([...newArray])
     })
-    setOpen(false);
+    setOpen(true);
   }
 
 
@@ -217,7 +217,7 @@ const handleClose = () => {
                             {item.firstname}
                           </StyledTableCell>
                           <StyledTableCell style={{ backgroundColor: 'rgb(255, 255, 255)', border: '1px medium grey'}} component="th" scope="row">
-                            <Button  onClick={handleOpen}><i class="fas fa-pen"></i></Button>
+                            <Button  onClick={() => updateData(item._id)}><i class="fas fa-pen"></i></Button>
                             <Button  onClick={() => deleteSelected(item._id)}><i  class="fas fa-trash-alt"></i></Button>
                           </StyledTableCell>
                           

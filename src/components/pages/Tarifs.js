@@ -3,6 +3,7 @@ import '../../App.css';
 import Footer from '../Footer';
 import NavBar from '../Navbar.js'
 import TarifCaroussel from '../tarifcaroussel.js'
+import TarifCard from '../TarifCard.js'
 
 
 export default function Tarifs() {
@@ -10,8 +11,8 @@ export default function Tarifs() {
     <>
     <NavBar />
     <TarifCaroussel />
+    <TarifCard />
     <Footer />
     </>
 );
-
 }

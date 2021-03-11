@@ -4,9 +4,21 @@
     justify-content: space-between;
 }
 
+.input-1{
+    display: flex;
+}
+.input-2{
+    display: flex;
+}
+.input-3{
+    display: flex;
+}
+.input-4{
+    display: flex;
+}
 
 .code-entreprise {
-    margin-left: 60px;
+    margin-left: 20px;
     padding-left: 10px;
     height: 50px;
     width: 100px;
@@ -15,51 +27,42 @@
     margin-bottom: 10px;
 }
 
-.Raison-social{
-    margin-left: 30px;
-    margin-right: 40px;
+.raison-social {
+    margin-left: 20px;
     padding-left: 10px;
     height: 50px;
-    width: 250px;
+    width: 380px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
     margin-bottom: 10px;
 }
 
-.nom-du-entreprise {
+.type-entreprise {
+    margin-left: 20px;
     padding-left: 10px;
     height: 50px;
-    width: 250px;
-    border-radius: 5px;
-    border-color: rgb(70, 140, 245);
-}
-
-.prenom-du-entreprise{
-    margin-left: 60px;
-    margin-right: 40px;
-    margin-bottom: 10px;
-    padding-left: 10px;
-    height: 50px;
-    width: 250px;
+    width: 240px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
 }
 
 .email-entreprise{
+    margin-left: 20px;
     padding-left: 10px;
+    margin-bottom: 10px;
     height: 50px;
-    width: 250px;
+    width: 240px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
 }
 
 .tel-entreprise{
-    margin-left: 60px;
-    margin-right: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
     margin-bottom: 10px;
     padding-left: 10px;
     height: 50px;
-    width: 250px;
+    width: 240px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
 }
@@ -67,18 +70,18 @@
 .adreese-entreprise{
     padding-left: 10px;
     height: 50px;
-    width: 250px;
+    width: 240px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
 }
 
 .activité-entreprise{
-    margin-left: 60px;
+    margin-left: 20px;
     margin-right: 40px;
     margin-bottom: 10px;
     padding-left: 10px;
     height: 50px;
-    width: 250px;
+    width: 240px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
 }
@@ -105,6 +108,6 @@
 }
 
 .btn-entreprise-modal{ 
-    margin-top: 30px;
-    margin-left: 230px;
+    margin-top: 50px;
+    margin-left: 155px;
 }

@@ -1,89 +1,91 @@
-.all-input{
+.des-modal{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cntt-des-1 {
     display: flex;
     flex-direction: column;
 }
 
-.input-1 {
-    display: flex;
-    flex-direction: row;
-}
 
-.input-2 {
-    display: flex;
-    flex-direction: row;
-}
 
-.input-3 {
-    display: flex;
-    flex-direction: row;
-}
 
-.code-produit {
-    margin-left: 20px;
-    padding-left: 10px;
-    height: 50px;
-    width: 100px;
-    border-radius: 5px;
-    border-color: rgb(70, 140, 245);
-    margin-bottom: 10px;
-}
-
-.nom-produit{
+.des-description{
     margin-left: 20px;
     margin-right: 40px;
     padding-left: 10px;
-    height: 50px;
-    width: 390px;
+    padding-bottom: 100px;
+    height: 150px;
+    width: 460px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
     margin-bottom: 10px;
 }
 
-.discription-produit {
-    margin-left: 20px;
-    padding-left: 10px;
-    padding-bottom: 70px;
-    margin-bottom: 10px;
-    height: 100px;
-    width: 475px;
-    border-radius: 5px;
-    border-color: rgb(70, 140, 245);
-}
-
-
-.prix-achat{
+.des-prix-ht {
     margin-left: 20px;
     padding-left: 10px;
     height: 50px;
-    width: 240px;
+    width: 220px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
 }
 
-.prix-vente{
+.pu-q {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.des-quantite{
     margin-left: 20px;
-    margin-right: 40px;
-    margin-bottom: 10px;
     padding-left: 10px;
     height: 50px;
-    width: 240px;
+    width: 220px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
 }
 
-.note-produit{
+.des-prix-total{
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-left: 10px;
+    height: 50px;
+    width: 220px;
+    border-radius: 5px;
+    border-color: rgb(70, 140, 245);
+}
+
+.des-prix-remise{
+    margin-top: 10px;
+    margin-left: 0px;
+    padding-left: 10px;
+    height: 50px;
+    width: 220px;
+    border-radius: 5px;
+    border-color: rgb(70, 140, 245);
+}
+
+.des-prix-total-ht {
+    margin-top: 10px;
     margin-left: 20px;
     padding-left: 10px;
-    padding-bottom: 70px;
-    margin-bottom: 10px;
-    height: 100px;
-    width: 475px;
+    height: 50px;
+    width: 220px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
+
+}
+.des-pt-ht{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:  wrap;
 }
 
-
-.produit-enregistrer {
+.des-enregistrer {
     margin-right: 10px;
     height: 40px;
     width: 100px;
@@ -94,7 +96,7 @@
 
 }
 
-.produit-annuler {
+.des-annuler {
     margin-left: 10px;
     height: 40px;
     width: 100px;
@@ -104,7 +106,7 @@
     color: rgb(70, 140, 245);
 }
 
-.btn-produit-modal{ 
-    margin-top: 55px;
+.btn-des-modal{ 
+    margin-top: 70px;
     margin-left: 130px;
 }

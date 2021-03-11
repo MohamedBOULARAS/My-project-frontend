@@ -104,10 +104,10 @@ export default function ProduitModal({setProduit,produit}) {
 
   const body = (
     <div className="produit-modal">
-    <div style={{modalStyle, height: '700px', width: '800px', marginTop: '6vh', marginLeft: '23vw', borderRadius: '10px', border: 'none', boxShadow: 'black'}} className={classes.paper}>
-      <div className="cntt-produit-modal">
-        <div className="cntt-produit-1">
+    <div style={{modalStyle, height: '600px', width: '600px', marginTop: '7vh', marginLeft: '30vw', borderRadius: '10px', border: 'none', boxShadow: 'black'}} className={classes.paper}>
       <h2 style={{paddingTop: '30px', paddingLeft: '30px'}} id="simple-modal-title">Produits et Services</h2>     
+      <div className="all-input">
+      <div className="input-1">
       <input type="text"
                         className="code-produit"
                         id="code_produit"
@@ -122,6 +122,8 @@ export default function ProduitModal({setProduit,produit}) {
                         onChange={nomProduitHandler}
                         value={nomProduit}
       /> 
+      </div>
+      <div className="input-2">
       <input type="text"
                         className="discription-produit"
                         id="discription"
@@ -129,6 +131,8 @@ export default function ProduitModal({setProduit,produit}) {
                         onChange={discriptionHandler}
                         value={discription}
       /> 
+      </div>
+      <div className="input-3">
        <input type="text"
                         className="prix-achat"
                         id="prixAchat"
@@ -136,13 +140,14 @@ export default function ProduitModal({setProduit,produit}) {
                         onChange={prixAchatHandler}
                         value={prixAchat}
       /> 
-             <input type="text"
+      <input type="text"
                         className="prix-vente"
                         id="prixVente"
                         placeholder="Prix de vente"
                         onChange={prixVenteHandler}
                         value={prixVente}
       /> 
+       </div>
       <input type="text"
                         className="note-produit"
                         id="noteProduit"
@@ -150,8 +155,8 @@ export default function ProduitModal({setProduit,produit}) {
                         onChange={noteHandler}
                         value={note}
 
-      /> 
-      </div>
+      />
+     
       </div>
       <div className="btn-produit-modal">
       <button className='produit-enregistrer' onClick={addProduit} onSubmit={addProduit}>Enregistrer</button>

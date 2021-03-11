@@ -1,12 +1,33 @@
-.user-modal{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.all-ligne {
+    display: flex; 
+    flex-direction: column
 }
 
 
+.ligne-1 {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.ligne-2 {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.ligne-3 {
+    display: flex;
+    flex-direction: row;
+}
+
+.ligne-4 {
+    display: flex;
+    flex-direction: row;
+}
+
 .code-user {
-    margin-left: 60px;
+    margin-left: 30px;
     padding-left: 10px;
     height: 50px;
     width: 100px;
@@ -16,17 +37,18 @@
 }
 
 .userName{
-    margin-left: 30px;
+    margin-left: 20px;
     margin-right: 40px;
     padding-left: 10px;
     height: 50px;
-    width: 250px;
+    width: 400px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
     margin-bottom: 10px;
 }
 
 .user-first-name {
+    margin-left: 30px;
     padding-left: 10px;
     height: 50px;
     width: 250px;
@@ -35,7 +57,7 @@
 }
 
 .user-last-name{
-    margin-left: 60px;
+    margin-left: 20px;
     margin-right: 40px;
     margin-bottom: 10px;
     padding-left: 10px;
@@ -46,6 +68,7 @@
 }
 
 .user-email{
+    margin-left: 30px;
     padding-left: 10px;
     height: 50px;
     width: 250px;
@@ -54,7 +77,7 @@
 }
 
 .user-password{
-    margin-left: 60px;
+    margin-left: 20px;
     margin-right: 40px;
     margin-bottom: 10px;
     padding-left: 10px;
@@ -65,6 +88,7 @@
 }
 
 .role-user{
+    margin-left: 20px;
     padding-left: 10px;
     height: 50px;
     width: 250px;
@@ -94,7 +118,7 @@
     color: rgb(70, 140, 245);
 }
 
-.btn-user-modal{ 
-    margin-top: 30px;
-    margin-left: 230px;
+.bt-user-modal { 
+    margin-top: 80px;
+    margin-left: 170px;
 }

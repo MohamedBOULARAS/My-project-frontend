@@ -107,10 +107,11 @@ export default function EntrepriseModal({setEntreprise,entreprise}) {
 
   const body = (
     <div className="entreprise-modal">
-    <div style={{modalStyle, height: '700px', width: '800px', marginTop: '6vh', marginLeft: '23vw', borderRadius: '10px', border: 'none', boxShadow: 'black'}} className={classes.paper}>
+    <div style={{modalStyle, height: '500px', width: '600px', marginTop: '17vh', marginLeft: '31vw', borderRadius: '10px', border: 'none', boxShadow: 'black'}} className={classes.paper}>
       <div className="cntt-entreprise-modal">
-        <div className="cntt-entreprise-1">
-      <h2 style={{paddingTop: '30px', paddingLeft: '30px'}} id="simple-modal-title">Fournisseur</h2>     
+      <h2 style={{paddingTop: '30px', paddingLeft: '30px'}} id="simple-modal-title">Entreprise</h2>   
+      <div className="all-input">
+      <div className="input-1">
       <input type="text"
                         className="code-entreprise"
                         id="code_entreprise"
@@ -119,16 +120,18 @@ export default function EntrepriseModal({setEntreprise,entreprise}) {
                         value={codeEntreprise}
       /> 
       <input type="text"
-                        className="Raison-social"
+                        className="raison-social"
                         id="raisonSocial"
                         placeholder="Raison social"
                         onChange={raisonRaisonSocialHandler}
                         value={raisonSocial}
       /> 
+      </div>
+      <div className="input-2">
       <input type="text"
-                        className="nom-du-fournisseur"
-                        id="nomdufournisseur"
-                        placeholder="Nom d'entreprise "
+                        className="type-entreprise"
+                        id="typed'entreprise"
+                        placeholder="Type d'entreprise "
                         onChange={typeEntrepriseHandler}
                         value={typeEntreprise}
       /> 
@@ -139,15 +142,17 @@ export default function EntrepriseModal({setEntreprise,entreprise}) {
                         onChange={emailEntrepriseHandler}
                         value={emailEntreprise}
       /> 
-             <input type="text"
-                        className="tel-Entreprise"
+      </div>
+      <div className="input-3">
+      <input type="text"
+                        className="tel-entreprise"
                         id="telEntreprise"
                         placeholder="Numéro de téléphone"
                         onChange={tellEntrepriseHandler}
                         value={tellEntreprise}
       /> 
       <input type="text"
-                        className="adreese-Entreprise"
+                        className="adreese-entreprise"
                         id="adresseEntreprise"
                         placeholder="Adresse de l'entreprise "
                         onChange={adresseEntrepriseHandler}
@@ -155,15 +160,16 @@ export default function EntrepriseModal({setEntreprise,entreprise}) {
 
       /> 
       </div>
-      <div className="cntt-entreprise-2">
+      <div className="input-4">
       <input type="text"
                         className="activité-entreprise"
-                        id="activitéEntreprise"
-                        placeholder="activité de l'entreprise "
+                        id="ActivitéEntreprise"
+                        placeholder="Activité de l'entreprise "
                         onChange={activiteEntrepriseHandler}
                         value={activiteEntreprise}
 
-      />  
+      /> 
+      </div>  
       </div> 
       </div>
       <div className="btn-entreprise-modal">

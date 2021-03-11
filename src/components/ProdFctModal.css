@@ -1,89 +1,99 @@
-.all-input{
+.prodact-modal{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cntt-prodact-1 {
     display: flex;
     flex-direction: column;
 }
 
-.input-1 {
-    display: flex;
-    flex-direction: row;
-}
 
-.input-2 {
-    display: flex;
-    flex-direction: row;
-}
-
-.input-3 {
-    display: flex;
-    flex-direction: row;
-}
-
-.code-produit {
+.prodact {
     margin-left: 20px;
     padding-left: 10px;
     height: 50px;
-    width: 100px;
+    width: 460px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
     margin-bottom: 10px;
 }
 
-.nom-produit{
+.description{
     margin-left: 20px;
     margin-right: 40px;
     padding-left: 10px;
-    height: 50px;
-    width: 390px;
-    border-radius: 5px;
-    border-color: rgb(70, 140, 245);
-    margin-bottom: 10px;
-}
-
-.discription-produit {
-    margin-left: 20px;
-    padding-left: 10px;
-    padding-bottom: 70px;
-    margin-bottom: 10px;
+    padding-bottom: 50px;
     height: 100px;
-    width: 475px;
+    width: 460px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
+    margin-bottom: 10px;
 }
 
-
-.prix-achat{
+.prix-unitaire {
     margin-left: 20px;
     padding-left: 10px;
     height: 50px;
-    width: 240px;
+    width: 220px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
 }
 
-.prix-vente{
+.pu-q {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.quantite{
     margin-left: 20px;
-    margin-right: 40px;
-    margin-bottom: 10px;
     padding-left: 10px;
     height: 50px;
-    width: 240px;
+    width: 220px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
 }
 
-.note-produit{
+.prix-total{
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-left: 10px;
+    height: 50px;
+    width: 220px;
+    border-radius: 5px;
+    border-color: rgb(70, 140, 245);
+}
+
+.prix-remise{
+    margin-top: 10px;
+    margin-left: 0px;
+    padding-left: 10px;
+    height: 50px;
+    width: 220px;
+    border-radius: 5px;
+    border-color: rgb(70, 140, 245);
+}
+
+.prix-ht {
+    margin-top: 10px;
     margin-left: 20px;
     padding-left: 10px;
-    padding-bottom: 70px;
-    margin-bottom: 10px;
-    height: 100px;
-    width: 475px;
+    height: 50px;
+    width: 220px;
     border-radius: 5px;
     border-color: rgb(70, 140, 245);
+
+}
+.pt-ht{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:  wrap;
 }
 
-
-.produit-enregistrer {
+.prodact-enregistrer {
     margin-right: 10px;
     height: 40px;
     width: 100px;
@@ -94,7 +104,7 @@
 
 }
 
-.produit-annuler {
+.prodact-annuler {
     margin-left: 10px;
     height: 40px;
     width: 100px;
@@ -104,7 +114,7 @@
     color: rgb(70, 140, 245);
 }
 
-.btn-produit-modal{ 
-    margin-top: 55px;
+.btn-prodact-modal{ 
+    margin-top: 50px;
     margin-left: 130px;
 }

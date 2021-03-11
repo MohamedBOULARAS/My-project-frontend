@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useStylesuseS } from 'react';
 import ClientModal from '../ClientModal.js';
+import SidBar from '../Sidebar.js';
+import NavFCT from '../NavBarFct.js'
+import Notification from '../Notification.js';
+import ConfirmDialog from '../ConfirmDialog.js';
 import './Client.css';
 import axios from 'axios';
-import SidBar from '../Sidebar.js';
+import cookie from 'react-cookies';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,10 +16,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-import NavFCT from '../NavBarFct.js'
 import { Button } from '@material-ui/core';
 import TablePagination from '@material-ui/core/TablePagination';
-import cookie from 'react-cookies'
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -59,6 +61,13 @@ const Client = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  //Notification 
+  const [notify, setNotify] = useState({isOpen: false, message: "", type: ""});
+
+  //Confirm Dialog
+  const [confirmDialog, setConfirmDialog] = useState({isOpen: false, title: "", subTitle: ""});
+
+ 
   const HandleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
@@ -100,17 +109,29 @@ const Client = () => {
 
   //delete items
   const deleteSelected = async (id) => {
-    console.log(myCookie)
-    axios.delete(`http://localhost:5000/client/${id}`, {
-      headers: {
-        'Authorization': myCookie.token
-      }
+
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false
     })
-      .then(res => {
-        console.log(res)
-        setClient(client.filter(item => item._id != id))
+
+      console.log(myCookie)
+      axios.delete(`http://localhost:5000/client/${id}`, {
+        headers: {
+          'Authorization': myCookie.token
+        }
       })
-      .catch(err => console.log(err))
+        .then(res => {
+          console.log(res)
+          setClient(client.filter(item => item._id != id))
+        })
+        .catch(err => console.log(err))
+  
+        setNotify({
+          isOpen: true,
+          message: 'Supprimé avec succès',
+          type: 'error'
+        })
 
   }
 
@@ -146,6 +167,8 @@ const handleClose = () => {
   return (
     <>
       <NavFCT />
+      <Notification notify= {notify} setNotify = {setNotify} />
+
       <div className='client-page'>
         <div className='sidebar'>
           <SidBar />
@@ -230,7 +253,16 @@ const handleClose = () => {
                           </StyledTableCell>
                           <StyledTableCell style={{ backgroundColor: 'rgb(255, 255, 255)', border: '1px medium grey'}} component="th" scope="row">
                             <Button  onClick={handleOpen}><i class="fas fa-pen"></i></Button>
-                            <Button  onClick={() => deleteSelected(item._id)}><i  class="fas fa-trash-alt"></i></Button>
+                            <Button  
+                            onClick={ () => {
+                             setConfirmDialog({
+                                isOpen: true,
+                                title: "Vous ete sur de vouloir supprimer ce client ?",
+                                subTitle: "Si vous cliquer sur OUI, vous allez supprimer le client !",
+                                onConfirm: () => { deleteSelected(item._id) }
+                              })
+                              //() => deleteSelected(item._id)
+                            }}><i  class="fas fa-trash-alt"></i></Button>
                           </StyledTableCell>
                           
                         </StyledTableRow>
@@ -248,6 +280,7 @@ const handleClose = () => {
                 onChangeRowsPerPage={HandleChangeRowsPerPage}
               />
             </TableContainer>
+            <ConfirmDialog confirmDialog={confirmDialog}  setConfirmDialog={setConfirmDialog}/>
 
           </div>
         </div>
